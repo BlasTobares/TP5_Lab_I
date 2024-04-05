@@ -4,6 +4,8 @@
  */
 package tp5_lab_i;
 
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import tp5_lab_i.clases.Producto;
 
@@ -12,7 +14,9 @@ import tp5_lab_i.clases.Producto;
  * @author SrPanda
  */
 public class TP5_LAB_1 extends javax.swing.JFrame {
-    private DefaultTableModel modelo= new DefaultTableModel();
+
+    private DefaultTableModel modelo = new DefaultTableModel();
+
     /**
      * Creates new form TP5_LAB_1
      */
@@ -150,22 +154,51 @@ public class TP5_LAB_1 extends javax.swing.JFrame {
 
     private void jtnombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtnombreActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_jtnombreActionPerformed
 
     private void jbeliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbeliminarActionPerformed
         // TODO add your handling code here:
+<<<<<<< HEAD
         String nombre= jtnombre.getText();
         double precio= Double.parseDouble(jtprecio.getText());
         String categoria = jcategoria.getActionCommand();
         Producto prod = new Producto(nombre, precio,categoria);
         cargarDatos(prod);
         
+=======
+
+>>>>>>> 7c590e0b5b82c46cc4c458345607b79ea1465990
     }//GEN-LAST:event_jbeliminarActionPerformed
 
     private void jbagregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbagregarActionPerformed
-        // TODO add your handling code here:
-        
+
+        String nombre;
+        double precio;
+        String categoria;
+        try {
+            precio = Double.parseDouble(jtprecio.getText());
+        } catch (NumberFormatException nfe) {
+            JOptionPane.showMessageDialog(this, "El precio debe ser un número.");
+            return;
+        }
+        nombre = jtnombre.getText();
+        try {
+            if (nombre.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "El nombre no debe estar vacío.");
+                return;
+            }
+        } catch (Exception e) {
+             JOptionPane.showMessageDialog(this, "Algo aNDA MAL");
+        }
+
+        categoria = (String) jcategoria.getSelectedItem();
+
+        Producto p = new Producto(nombre, precio, categoria);
+        Producto.add(p);
+        JOptionPane.showMessageDialog(this, "Producto Guardado");
+        limpiarCampos();
+
     }//GEN-LAST:event_jbagregarActionPerformed
 
     /**
@@ -216,18 +249,30 @@ public class TP5_LAB_1 extends javax.swing.JFrame {
     private javax.swing.JTextField jtnombre;
     private javax.swing.JTextField jtprecio;
     // End of variables declaration//GEN-END:variables
+<<<<<<< HEAD
     
     private void  armarCabecera(){
+=======
+    private void armarCabecera() {
+>>>>>>> 7c590e0b5b82c46cc4c458345607b79ea1465990
         modelo.addColumn("Nombre");
         modelo.addColumn("Precio");
         modelo.addColumn("Categoria");
         jtable.setModel(modelo);
     }
+<<<<<<< HEAD
     
     private void cargarDatos(Producto producto){
     
     modelo.addRow(new Object[]{producto.getNombre(),producto.getPrecio(),producto.getCategoria()});
     }
+=======
+
+    private void limpiarCampos() {
+        jtnombre.setText("");
+        jtprecio.setText("");
+
+    }
+
+>>>>>>> 7c590e0b5b82c46cc4c458345607b79ea1465990
 }
-
-
