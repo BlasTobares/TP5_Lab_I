@@ -4,7 +4,10 @@
  */
 package tp5_lab_i;
 
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import tp5_lab_i.clases.Producto;
 
 /**
  *
@@ -158,7 +161,28 @@ public class TP5_LAB_1 extends javax.swing.JFrame {
     }//GEN-LAST:event_jbeliminarActionPerformed
 
     private void jbagregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbagregarActionPerformed
-        // TODO add your handling code here:
+        String nombre;
+        double precio;
+        String categoria;
+        try{        
+             precio=Double.parseDouble(jtprecio.getText());
+        }catch(Exception nfe){
+            JOptionPane.showMessageDialog(this, "El precio debe ser un nro.");
+            return;                 
+        }
+        try{
+            nombre=(String)jtnombre.getText();
+        }catch(Exception n){
+            JOptionPane.showMessageDialog(this, "El nombre no tiene que estar vacio");
+        }
+  
+           categoria=(String)jcategoria.getSelectedItem();
+        
+        Producto p=new Producto(nombre, precio, categoria);
+        ArrayList<Producto> lista=TP5_Lab_I.getProducto;
+        lista.add(p);
+        JOptionPane.showMessageDialog(this,"Producto Guardado");
+        limpiarCampos();
         
     }//GEN-LAST:event_jbagregarActionPerformed
 
@@ -216,6 +240,14 @@ public class TP5_LAB_1 extends javax.swing.JFrame {
         modelo.addColumn("Categoria");
         jtable.setModel(modelo);
     }
+    private void limpiarCampos() {
+        jtnombre.setText("");
+        jtprecio.setText("");
+
+    }
+    
+    
+    
 }
 
 
