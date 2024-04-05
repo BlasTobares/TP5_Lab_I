@@ -9,6 +9,10 @@ package tp5_lab_i.clases;
  * @author SrPanda
  */
 public class Producto {
+
+    public static void add(Producto p) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     private String nombre;
     private double precio;
     private String categoria;
