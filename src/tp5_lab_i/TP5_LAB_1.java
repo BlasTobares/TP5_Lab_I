@@ -5,6 +5,7 @@
 package tp5_lab_i;
 
 import javax.swing.table.DefaultTableModel;
+import tp5_lab_i.clases.Producto;
 
 /**
  *
@@ -154,6 +155,11 @@ public class TP5_LAB_1 extends javax.swing.JFrame {
 
     private void jbeliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbeliminarActionPerformed
         // TODO add your handling code here:
+        String nombre= jtnombre.getText();
+        double precio= Double.parseDouble(jtprecio.getText());
+        String categoria = jcategoria.getActionCommand();
+        Producto prod = new Producto(nombre, precio,categoria);
+        cargarDatos(prod);
         
     }//GEN-LAST:event_jbeliminarActionPerformed
 
@@ -210,11 +216,17 @@ public class TP5_LAB_1 extends javax.swing.JFrame {
     private javax.swing.JTextField jtnombre;
     private javax.swing.JTextField jtprecio;
     // End of variables declaration//GEN-END:variables
+    
     private void  armarCabecera(){
         modelo.addColumn("Nombre");
         modelo.addColumn("Precio");
         modelo.addColumn("Categoria");
         jtable.setModel(modelo);
+    }
+    
+    private void cargarDatos(Producto producto){
+    
+    modelo.addRow(new Object[]{producto.getNombre(),producto.getPrecio(),producto.getCategoria()});
     }
 }
 
