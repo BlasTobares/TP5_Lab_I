@@ -178,6 +178,7 @@ public class TP5_LAB_1 extends javax.swing.JFrame {
             nombre = (String) jtnombre.getText();
             if (nombre.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Llene el campo");
+                return;
             }
         } catch (Exception n) {
             JOptionPane.showMessageDialog(this, "El nombre no tiene que estar vacio");
