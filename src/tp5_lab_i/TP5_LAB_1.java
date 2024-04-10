@@ -16,7 +16,6 @@ import tp5_lab_i.clases.Producto;
 public class TP5_LAB_1 extends javax.swing.JFrame {
 
     private DefaultTableModel modelo = new DefaultTableModel();
-    private ArrayList<Producto> listaProductos;
 
     /**
      * Creates new form TP5_LAB_1
@@ -173,39 +172,30 @@ public class TP5_LAB_1 extends javax.swing.JFrame {
     }//GEN-LAST:event_jbeliminarActionPerformed
 
     private void jbagregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbagregarActionPerformed
-        String nombre = jtnombre.getText();
-        double precio;
-        String categoria;
 
-        try {
-            precio = Double.parseDouble(jtprecio.getText());
-        } catch (Exception nfe) {
-            JOptionPane.showMessageDialog(this, "El precio debe ser un nro.");
+        if(jtprecio.getText().isEmpty() || jtnombre.getText().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Por favor complete todos los campos obligatorios.");
             return;
         }
 
+        double precioDouble;
         try {
-            nombre = (String) jtnombre.getText();
-            if (nombre.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Llene el campo");
-                return;
-            }
-        } catch (Exception n) {
-            JOptionPane.showMessageDialog(this, "El nombre no tiene que estar vacio");
+             precioDouble = Double.parseDouble(jtprecio.getText());
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "El precio no es un número válido.");
+            return;
         }
 
-        categoria = (String) jcategoria.getSelectedItem();
+        String nombre = jtnombre.getText();
+        if(nombre.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "El nombre del producto no puede estar vacío.");
+            return;
+        }
 
-        Producto p = new Producto(nombre, precio, categoria);
-
-        listaProductos = new ArrayList<>(); // Inicializamos el ArrayList en el constructor
-
-        // Aquí obtenemos la lista de productos directamente desde la instancia de TP5_Lab_I
-        ArrayList<Producto> lista = getListaProductos();
-
-        lista.add(p);
-        modelo.addRow(new Object[]{p.getNombre(), p.getPrecio(), p.getCategoria()});
-        JOptionPane.showMessageDialog(this, "Producto Guardado");
+        String categoria = (String) jcategoria.getSelectedItem();
+        Producto producto = new Producto(nombre, precioDouble, categoria);
+        modelo.addRow(new Object[]{producto.getNombre(), producto.getPrecio(), producto.getCategoria()});
+        JOptionPane.showMessageDialog(this, "Producto creado correctamente.");
         limpiarCampos();
     }//GEN-LAST:event_jbagregarActionPerformed
 
@@ -257,7 +247,8 @@ public class TP5_LAB_1 extends javax.swing.JFrame {
     private javax.swing.JTextField jtnombre;
     private javax.swing.JTextField jtprecio;
     // End of variables declaration//GEN-END:variables
-private void armarCabecera() {
+
+    private void armarCabecera() {
         modelo.addColumn("Nombre");
         modelo.addColumn("Precio");
         modelo.addColumn("Categoria");
@@ -267,10 +258,5 @@ private void armarCabecera() {
     private void limpiarCampos() {
         jtnombre.setText("");
         jtprecio.setText("");
-
-    }
-
-    public ArrayList<Producto> getListaProductos() {
-        return listaProductos;
     }
 }
